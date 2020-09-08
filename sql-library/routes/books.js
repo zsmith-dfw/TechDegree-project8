@@ -27,7 +27,7 @@ router.get('/new', (req, res) => {
 /* POST created books. */
 router.post('/', asyncHandler(async (req, res) => {
   const book = await Book.create(req.body);
-  res.redirect(`/books/${book.id}`);
+  res.redirect("/books");
 }));
 
 /* Update book */
