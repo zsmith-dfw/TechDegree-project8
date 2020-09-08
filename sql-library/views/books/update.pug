@@ -1,0 +1,8 @@
+extends ../layout
+
+block content
+  h1= title
+  
+  form(action="/books/" + book.id + "/update", method="post")
+    include form
+
