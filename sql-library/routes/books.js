@@ -36,5 +36,14 @@ router.get("/:id/update", asyncHandler(async(req, res) => {
   res.render("books/update", { book, title: "Update Book" });
 }));
 
+
+/* POST updated book */
+router.post('/:id/update', asyncHandler(async (req, res) => {
+  const book = await Book.findByPk(req.params.id)
+  await book.update(req.body)
+  res.redirect("/books");
+}));
+
+
 module.exports = router;
 
