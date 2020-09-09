@@ -1,8 +1,12 @@
 extends ../layout
 
 block content
+  include form
   h1= title
   
   form(action="/books/" + book.id + "/update", method="post")
-    include form
+    +form('Update Book')
+    p
+      input(href= `/books/${book.id}/delete` type='submit' value= 'Delete Book')
+
 
