@@ -44,12 +44,6 @@ router.post('/:id/update', asyncHandler(async (req, res) => {
   res.redirect("/books");
 }));
 
-/* Asking for delete confirmation */
-router.get("/:id/delete", asyncHandler(async (req, res) => {
-  const book = await Book.findByPk(req.params.id);
-  res.render("books/delete", { book, title: "Delete Book" });
-}));
-
 /* Delete book from the database. */
 router.post('/:id/delete', asyncHandler(async (req ,res) => {
   const book = await Book.findByPk(req.params.id)

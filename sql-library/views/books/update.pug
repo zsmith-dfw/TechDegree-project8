@@ -4,9 +4,12 @@ block content
   include form
   h1= title
   
-  form(action="/books/" + book.id + "/update", method="post")
+  form(action=`/books/${book.id}/update`, method="post")
     +form('Update Book')
-    p
+  form(action=`/books/${book.id}/delete`, method="post")
+    p 
       input(href= `/books/${book.id}/delete` type='submit' value= 'Delete Book')
 
 
+
+    //- <form action=`/books/${book.id}/delete`, method="post" onsubmit="return confirm('Do you really want to delete this book?')">
