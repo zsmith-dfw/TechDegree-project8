@@ -52,16 +52,22 @@ router.post(
 
 /* Update book */
 router.get(
-  "/:id/update",
-  asyncHandler(async (req, res) => {
+  "/:id",
+  asyncHandler(async (req, res, next) => {
     const book = await Book.findByPk(req.params.id);
-    res.render("books/update-book", { book, title: "Update Book" });
+    if (book) {
+      res.render("books/update-book", { book, title: "Update Book" });
+    } else {
+      const error = new Error("Not found");
+      error.status = 404;
+      next(error);
+    }
   })
 );
 
 /* POST updated book */
 router.post(
-  "/:id/update",
+  "/:id",
   asyncHandler(async (req, res) => {
     let book;
     try {
