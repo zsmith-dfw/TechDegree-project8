@@ -16,9 +16,16 @@ function asyncHandler(cb) {
 /* GET books listing. */
 router.get(
   "/",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const books = await Book.findAll();
-    res.render("books/index", { books, title: "Books" });
+    if(books) {
+      res.render("books/index", { books, title: "Books" });
+    } else {
+      const error = new Error('404 error');
+      error.status = 404
+      next(error)
+    }
+
   })
 );
 
@@ -58,8 +65,8 @@ router.get(
     if (book) {
       res.render("books/update-book", { book, title: "Update Book" });
     } else {
-      const error = new Error("Not found");
-      error.status = 404;
+      const error = new Error("500 error");
+      error.status = 500;
       next(error);
     }
   })
